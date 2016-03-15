@@ -38,9 +38,6 @@ float Calculator::calculate(string infix) {
 		}
 	}
 
-	if (readingNumber)
-		_operands.push(stof(number, nullptr));
-
 	while (!_operators.empty()) {
 		performOperation(_operators.top());
 		_operators.pop();
