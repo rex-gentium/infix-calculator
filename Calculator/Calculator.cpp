@@ -6,25 +6,17 @@ Calculator::~Calculator() {}
 
 float Calculator::calculate(string infix) {
 
-	bool readingNumber = false;
-	string number = "";
-
 	for (int i = 0; i < infix.length(); i++) {
 
 		char c = infix[i];
-
-		if (readingNumber && !isDigit(c) && !isFloatingPoint(c)) {
-				_operands.push(stof(number, nullptr));
-				number = "";
-				readingNumber = false;
-		}
 		
 		if (isDelimitter(c))
 			continue;
 
 		if (isDigit(c) || isFloatingPoint(c)) {
-			number += c;
-			readingNumber = true;
+			size_t k = 0;
+			_operands.push(stof(infix.substr(i), &k));
+			i += k - 1;
 		}
 
 		else if (isOpenParenthesis(c))
